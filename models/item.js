@@ -1,19 +1,18 @@
 const mongoose = require("mongoose");
-const {ObjectId} = mongoose.Schema.Types;
 const ItemSchema = new mongoose.Schema({
     name : {
         type : String,
         required : true,
     },
-    available : {
-        type : Boolean,
+    stock : {
+        type : Number,
         required : true,
-        default : true,
+        min : 0,
     },
     inPossessionOf : {
-        type : ObjectId,
-        ref : "users",
-        default : null,
+        type : Array,
+        required : true,
+        default : [],
     },
     // ADD IMAGES
     // image : {
