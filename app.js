@@ -1,5 +1,6 @@
 const connection = require("./connectToDatabase");
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
 const userRouter = require("./routes/user");
@@ -11,6 +12,9 @@ connection();
 // APP SETTINGS
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
+app.use(cors({
+    origin : "*"
+}));
 
 // APP ROUTES
 app.use("/api/v1/users", userRouter);
