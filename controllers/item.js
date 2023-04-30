@@ -33,7 +33,7 @@ class Item {
     }
     async deleteItem(req,res) {
         try {
-            const item = await ItemModel.findByIdAndDelete(req.body._id);
+            const item = await ItemModel.findByIdAndDelete(req.params.itemId);
             return res.send({success : "Deleted the item successfully!"});
         } catch(err) {
             console.log("An error occured while trying to delete the item");

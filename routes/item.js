@@ -7,6 +7,6 @@ router.get("/get-all-items/:userId",loginCheck,itemController.getAllItems);
 router.post("/add-item",loginCheck,itemController.addItem);
 router.post("/rent-item",loginCheck,itemController.rentItem);
 router.post("/return-item",loginCheck,itemController.returnItem);
-router.delete("/delete-item",loginCheck,itemController.deleteItem);
+router.delete("/delete-item/:itemId",loginCheck,itemController.deleteItem);
 
 module.exports = router;
