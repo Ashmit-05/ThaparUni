@@ -67,7 +67,16 @@ class Item {
     }
     async returnItem(req,res) {
         try {
-            let item = await ItemModel.findByIdAndUpdate(req.body._id,{available : true, inPossessionOf : null});
+            let item = await ItemModel.findOne({_id : req.body._id});
+            let user = await UserModel.findOne({_id : req.body.user});
+            let newStock = item.stock + 1;
+            let userArray = item.inPossessionOf;
+            for(let i = 0; i < userArray.length; i++) {
+                if(userArray[i] == user) {
+                    userArray.splice(i, 1);
+                }
+            }
+            let updateItem = await ItemModel.findOneAndUpdate({_id : req.body._id},{stock : newStock, inPossessionOf : userArray});
             return res.send({success : "Item returned successfully!"});
         } catch(err) {
             console.log("Unknown error");
